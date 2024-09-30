@@ -16,9 +16,7 @@
     </aside>
 
     <main>
-        @yield('login')
-        @yield('register')
-        @yield('join-as')
+        @yield('home')
     </main>
 </body>
 </html>

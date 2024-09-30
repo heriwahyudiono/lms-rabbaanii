@@ -33,7 +33,7 @@
         <div>
             <button type="submit">Daftar</button>
         </div>
-        <span>Sudah punya akun? <a href="/login">Login</a></span>
+        <span>Sudah punya akun? <a href="{{ url('login') }}">Login</a></span>
     </form>
 </div>
 @endsection

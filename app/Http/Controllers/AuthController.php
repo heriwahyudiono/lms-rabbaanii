@@ -46,25 +46,39 @@ class AuthController extends Controller
         if ($request->isMethod('post')) {
             $request->validate([
                 'name' => 'required|string',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|string|min:6',
-                'role' => 'required|string',
+                'email' => 'required|email',
+                'password' => 'required|string|min:6'
             ]);
 
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'role' => $request->role,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($request->password)
             ]);
 
             Auth::login($user);
 
-            return redirect()->route('home');
+            return redirect('join-as');
         }
 
         return view('auth/register');
     }
+
+    public function joinAs(Request $request) {
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'role' => 'required|string'
+            ]);
+    
+            $user = Auth::user(); 
+            $user->role = $request->role;
+            $user->save(); 
+    
+            return redirect('home');
+        }
+    
+        return view('auth/join-as');
+    }    
 
     public function logout()
     {
